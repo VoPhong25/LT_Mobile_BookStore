@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ShoppingDatabase extends SQLiteOpenHelper {
 
-    public static final String DB_NAME = "shopping_db";
+    public static final String DB_NAME = "bookstore_db";
     public static final int DB_VERSION = 1;
 
     public static final String TB_BOOK_HISTORY = "book_history";
@@ -26,7 +26,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
     public static final String TB_CLM_IMAGE = "image";
     public static final String TB_CLM_NAME = "name";
     public static final String TB_CLM_PRICE = "price";
-    public static final String TB_CLM_BRAND = "brand";
+    public static final String TB_CLM_AUTHOR = "author";
     public static final String TB_CLM_PIECES = "pieces";
     public static final String TB_CLM_DESCRIPTION = "description";
     public static final String TB_CLM_DISCOUNT = "discount";
@@ -59,7 +59,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 
 
         sqLiteDatabase.execSQL("CREATE TABLE " + TB_PURCHASES + " (" + TB_CLM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " + TB_CLM_IMAGE + " INTEGER , " +
-                TB_CLM_NAME + " TEXT , " + TB_CLM_PRICE + " REAL , " + TB_CLM_BRAND + " TEXT , " + TB_CLM_RATING + " REAL , " + TB_CLM_QUANTITY + " INTEGER );");
+                TB_CLM_NAME + " TEXT , " + TB_CLM_PRICE + " REAL , " + TB_CLM_AUTHOR + " TEXT , " + TB_CLM_RATING + " REAL , " + TB_CLM_QUANTITY + " INTEGER );");
 
     }
 
@@ -70,32 +70,27 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 
     public String createTables(String tableName) {
         return "CREATE TABLE " + tableName + " (" + TB_CLM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " + TB_CLM_IMAGE + " INTEGER , " +
-                TB_CLM_NAME + " TEXT , " + TB_CLM_PRICE + " REAL , " + TB_CLM_BRAND + " TEXT , " + TB_CLM_PIECES + " INTEGER , " +
+                TB_CLM_NAME + " TEXT , " + TB_CLM_PRICE + " REAL , " + TB_CLM_AUTHOR + " TEXT , " + TB_CLM_PIECES + " INTEGER , " +
                 TB_CLM_DESCRIPTION + " TEXT , " + TB_CLM_DISCOUNT + " REAL) ; ";
     }
-    public void deleteDb(Context context) {
-        context.deleteDatabase(DB_NAME);
-    }
-
-
     public void insertSampleData() {
         // insert vào bảng book history
-        insertProduct(new Products(R.drawable.hs_lsvn, "Lịch sử Việt Nam", 19, "VN", 10, "Đây là một cuốn sách viết về lịch của Vệt Nam", 10), TB_BOOK_HISTORY);
-        insertProduct(new Products(R.drawable.hs_lstg, "World History", 30, "VN", 5, "Đây là một cuón sách viết về lịch sử thế giới", 10), TB_BOOK_HISTORY);
-        insertProduct(new Products(R.drawable.hs_mo_in, "Modern Indian History", 19, "VN", 10, "Đây là một cuốn sách viết v lịch sử Ấn Độ", 0), TB_BOOK_HISTORY);
-        insertProduct(new Products(R.drawable.hs_this_day_in, "This day in History", 39, "VN", 5, "Go through the year, day by day, to discover the variety of events that took place on that day.", 10), TB_BOOK_HISTORY);
+        insertProduct(new Products(R.drawable.hs_lsvn, "Lịch sử Việt Nam", 19, "Nguyễn Ngọc Mão", 10, "Đây là một cuốn sách viết về lịch của Vệt Nam", 10), TB_BOOK_HISTORY);
+        insertProduct(new Products(R.drawable.hs_lstg, "World History", 30, "Brown Adam", 5, "Đây là một cuón sách viết về lịch sử thế giới", 10), TB_BOOK_HISTORY);
+        insertProduct(new Products(R.drawable.hs_mo_in, "Modern Indian History", 19, "StudyIQ Publications", 10, "Đây là một cuốn sách viết v lịch sử Ấn Độ", 0), TB_BOOK_HISTORY);
+        insertProduct(new Products(R.drawable.hs_this_day_in, "This day in History", 39, "Publications International Ltd.", 5, "Go through the year, day by day, to discover the variety of events that took place on that day.", 10), TB_BOOK_HISTORY);
 
         // insert vào bảng book novel
-        insertProduct(new Products(R.drawable.nv_sodo, "Số Đỏ", 9, "VN", 20, "Đây là một tác phẩm của nhà văn Vũ Trọng Phụng", 5), TB_BOOK_NOVEL);
-        insertProduct(new Products(R.drawable.nv_harrypotter, "Harry Potter", 14, "VN", 14, "Harry Potter là tên của bộ truyện (gồm 7 phần) của nữ nhà văn người Anh J. K. Rowling. Bộ truyện viết về những cuộc phiêu lưu phù thủy của cậu bé Harry Potter và những người bạn Ronald Weasley, Hermione Granger, lấy bối cảnh tại Trường Phù thủy và Pháp sư Hogwarts nước Anh.", 0), TB_BOOK_NOVEL);
-        insertProduct(new Products(R.drawable.nv_matbiec, "Mắt Biếc", 12, "VN", 20, "Đây là một tác phẩm của nhà văn Nguyễn Nhật Ánh", 5), TB_BOOK_NOVEL);
-        insertProduct(new Products(R.drawable.nv_nhagiakim, "Nhà Giả Kim", 12, "VN", 25, "Sách Nhà Giả Kim", 0), TB_BOOK_NOVEL);
+        insertProduct(new Products(R.drawable.nv_sodo, "Số Đỏ", 9, "Vũ Trọng Phụng", 20, "Đây là một tác phẩm của nhà văn Vũ Trọng Phụng", 5), TB_BOOK_NOVEL);
+        insertProduct(new Products(R.drawable.nv_harrypotter, "Harry Potter", 14, "L.K Rowling", 14, "Harry Potter là tên của bộ truyện (gồm 7 phần) của nữ nhà văn người Anh J. K. Rowling. Bộ truyện viết về những cuộc phiêu lưu phù thủy của cậu bé Harry Potter và những người bạn Ronald Weasley, Hermione Granger, lấy bối cảnh tại Trường Phù thủy và Pháp sư Hogwarts nước Anh.", 0), TB_BOOK_NOVEL);
+        insertProduct(new Products(R.drawable.nv_matbiec, "Mắt Biếc", 12, "Nguyễn Nhật Ánh", 20, "Đây là một tác phẩm của nhà văn Nguyễn Nhật Ánh", 5), TB_BOOK_NOVEL);
+        insertProduct(new Products(R.drawable.nv_nhagiakim, "Nhà Giả Kim", 12, "Micheal Scott", 25, "Sách Nhà Giả Kim", 0), TB_BOOK_NOVEL);
 
         // insert vào bảng book thrillers
-        insertProduct(new Products(R.drawable.thr_dianguc, "Địa ngục tầng thứ 19", 9, "VN", 10, "Đây là một cuốn sách kinh dị", 8), TB_BOOK_THRILLERS);
-        insertProduct(new Products(R.drawable.thr_ring, "Vòng tròn ác nghiệt", 14, "VN", 2, "Đây là một cuốn sách kinh dị", 0), TB_BOOK_THRILLERS);
-        insertProduct(new Products(R.drawable.thr_zoo, "Zoo", 9, "VN", 2, "Đây là một cuốn sách kinh dị", 6), TB_BOOK_THRILLERS);
-        insertProduct(new Products(R.drawable.thr_trang, "Kỳ án ánh trăng", 14, "VN", 5, "Đây là một cuốn sách kinh dị", 2), TB_BOOK_THRILLERS);
+        insertProduct(new Products(R.drawable.thr_dianguc, "Địa ngục tầng thứ 19", 9, "Không có thông tin", 10, "Đây là một cuốn sách kinh dị", 8), TB_BOOK_THRILLERS);
+        insertProduct(new Products(R.drawable.thr_ring, "Rinh - Vòng tròn ác nghiệt", 14, "Suzuki Koji", 2, "Đây là một cuốn sách kinh dị", 0), TB_BOOK_THRILLERS);
+        insertProduct(new Products(R.drawable.thr_zoo, "Zoo", 9, "Otsuuichi ......", 2, "Đây là một cuốn sách kinh dị", 6), TB_BOOK_THRILLERS);
+        insertProduct(new Products(R.drawable.thr_trang, "Kỳ án ánh trăng", 14, "Quỷ Cổ Nữ", 5, "Đây là một cuốn sách kinh dị", 2), TB_BOOK_THRILLERS);
 
         // insert vào bảng book self help
         insertProduct(new Products(R.drawable.sh_dnl, "Dám nghĩ lớn", 12, "VN", 21, "Theo Tiến sĩ Schwartz, để tạo nên những thay đổi trong cuộc sống và đạt được những điều bạn hằng khát khao, bạn cần thay đổi tư tưởng và thái độ của mình", 15), TB_BOOK_SELF_HELP);
@@ -111,6 +106,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
         insertProductInPurchases(new Products(R.drawable.hs_mo_in, "", 39.99, "", 4.0f, 1));
     }
 
+    //them sách vào bang tuong ứng
     public void insertProduct(Products p, String tableName) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -118,7 +114,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
         values.put(TB_CLM_IMAGE, p.getImage());
         values.put(TB_CLM_NAME, p.getName());
         values.put(TB_CLM_PRICE, p.getPrice());
-        values.put(TB_CLM_BRAND, p.getBrand());
+        values.put(TB_CLM_AUTHOR, p.getAuthor());
         values.put(TB_CLM_PIECES, p.getPieces());
         values.put(TB_CLM_DESCRIPTION, p.getDescription());
         values.put(TB_CLM_DISCOUNT, p.getDiscount());
@@ -137,7 +133,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
         values.put(TB_CLM_IMAGE, p.getImage());
         values.put(TB_CLM_NAME, p.getName());
         values.put(TB_CLM_PRICE, p.getPrice());
-        values.put(TB_CLM_BRAND, p.getBrand());
+        values.put(TB_CLM_AUTHOR, p.getAuthor());
         values.put(TB_CLM_PIECES, p.getPieces());
         values.put(TB_CLM_DESCRIPTION, p.getDescription());
         values.put(TB_CLM_DISCOUNT, p.getDiscount());
@@ -146,7 +142,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
         db.close();
 
     }
-
+    // lấy toàn bộ sách
     public ArrayList<Products> getAllProducts(String tableName) {
         ArrayList<Products> products = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -157,12 +153,12 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
                 @SuppressLint("Range") int image = cursor.getInt(cursor.getColumnIndex(TB_CLM_IMAGE));
                 @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(TB_CLM_NAME));
                 @SuppressLint("Range") Double price = cursor.getDouble(cursor.getColumnIndex(TB_CLM_PRICE));
-                @SuppressLint("Range") String brand = cursor.getString(cursor.getColumnIndex(TB_CLM_BRAND));
+                @SuppressLint("Range") String author = cursor.getString(cursor.getColumnIndex(TB_CLM_AUTHOR));
                 @SuppressLint("Range") int pieces = cursor.getInt(cursor.getColumnIndex(TB_CLM_PIECES));
                 @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex(TB_CLM_DESCRIPTION));
                 @SuppressLint("Range") double discount = cursor.getDouble(cursor.getColumnIndex(TB_CLM_DISCOUNT));
 
-                Products p = new Products(image, name, price, brand, pieces, description, discount);
+                Products p = new Products(image, name, price, author, pieces, description, discount);
                 products.add(p);
             } while (cursor.moveToNext());
             cursor.close();
@@ -170,7 +166,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
         db.close();
         return products;
     }
-
+    // lấy sách theo id
     public Products getProduct(int product_id, String tableName) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + tableName + " WHERE " + TB_CLM_ID + " =?", new String[]{String.valueOf(product_id)});
@@ -180,12 +176,12 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
             @SuppressLint("Range") int image = cursor.getInt(cursor.getColumnIndex(TB_CLM_IMAGE));
             @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(TB_CLM_NAME));
             @SuppressLint("Range") Double price = cursor.getDouble(cursor.getColumnIndex(TB_CLM_PRICE));
-            @SuppressLint("Range") String brand = cursor.getString(cursor.getColumnIndex(TB_CLM_BRAND));
+            @SuppressLint("Range") String author = cursor.getString(cursor.getColumnIndex(TB_CLM_AUTHOR));
             @SuppressLint("Range") int pieces = cursor.getInt(cursor.getColumnIndex(TB_CLM_PIECES));
             @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex(TB_CLM_DESCRIPTION));
             @SuppressLint("Range") double discount = cursor.getDouble(cursor.getColumnIndex(TB_CLM_DISCOUNT));
 
-            Products p = new Products(id, image, name, price, brand, pieces, description, discount);
+            Products p = new Products(id, image, name, price, author, pieces, description, discount);
             cursor.close();
             db.close();
             return p;
@@ -203,12 +199,12 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
                 @SuppressLint("Range") int image = cursor.getInt(cursor.getColumnIndex(TB_CLM_IMAGE));
                 @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(TB_CLM_NAME));
                 @SuppressLint("Range") Double price = cursor.getDouble(cursor.getColumnIndex(TB_CLM_PRICE));
-                @SuppressLint("Range") String brand = cursor.getString(cursor.getColumnIndex(TB_CLM_BRAND));
+                @SuppressLint("Range") String author = cursor.getString(cursor.getColumnIndex(TB_CLM_AUTHOR));
                 @SuppressLint("Range") int pieces = cursor.getInt(cursor.getColumnIndex(TB_CLM_PIECES));
                 @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex(TB_CLM_DESCRIPTION));
                 @SuppressLint("Range") double discount = cursor.getDouble(cursor.getColumnIndex(TB_CLM_DISCOUNT));
 
-                Products p = new Products(image, name, price, brand, pieces, description, discount);
+                Products p = new Products(image, name, price, author, pieces, description, discount);
                 products.add(p);
             } while (cursor.moveToNext());
             cursor.close();
@@ -229,8 +225,11 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
         db.delete("TB_PURCHASES", null, null);
         db.close();
     }
-
-
+    // xóa db
+    public void deleteDatabase(Context context) {
+        context.deleteDatabase(DB_NAME);
+    }
+    // them vào giỏ hangf
     public boolean insertProductInPurchases(Products p) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -238,7 +237,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
         values.put(TB_CLM_IMAGE, p.getImage());
         values.put(TB_CLM_NAME, p.getName());
         values.put(TB_CLM_PRICE, p.getPrice());
-        values.put(TB_CLM_BRAND, p.getBrand());
+        values.put(TB_CLM_AUTHOR, p.getAuthor());
         values.put(TB_CLM_RATING, p.getRating());
         values.put(TB_CLM_QUANTITY, p.getQuantity());
 
@@ -257,11 +256,11 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
                 @SuppressLint("Range") int image = cursor.getInt(cursor.getColumnIndex(TB_CLM_IMAGE));
                 @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(TB_CLM_NAME));
                 @SuppressLint("Range") Double price = cursor.getDouble(cursor.getColumnIndex(TB_CLM_PRICE));
-                @SuppressLint("Range") String brand = cursor.getString(cursor.getColumnIndex(TB_CLM_BRAND));
+                @SuppressLint("Range") String author = cursor.getString(cursor.getColumnIndex(TB_CLM_AUTHOR));
                 @SuppressLint("Range") float rating = cursor.getFloat(cursor.getColumnIndex(TB_CLM_RATING));
                 @SuppressLint("Range") int quantity = cursor.getInt(cursor.getColumnIndex(TB_CLM_QUANTITY));
 
-                Products p = new Products(image, name, price, brand, rating, quantity);
+                Products p = new Products(image, name, price, author, rating, quantity);
                 products.add(p);
             } while (cursor.moveToNext());
             cursor.close();

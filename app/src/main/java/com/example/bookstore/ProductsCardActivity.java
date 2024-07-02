@@ -37,9 +37,10 @@ public class ProductsCardActivity extends AppCompatActivity {
         tv_product_name.setAnimation(animation);
 
         db = new ShoppingDatabase(this);
-
+        // Lấy dữ liệu gửi từ MainActivity để xác định danh mục và hiển thị tên danh mục lên TextView
         Intent intent = getIntent();
         String name;
+        //lay ra sach voi danh muc tuong ung
         switch (MainActivity.name_data){
             case "History":
                 name = intent.getStringExtra(MainActivity.BOOK_HISTORY_KEY);
@@ -64,11 +65,13 @@ public class ProductsCardActivity extends AppCompatActivity {
         }
         MainActivity.name_data = "";
 
+        //lấy ra danh sách các cuốn sách với bảng tương ứng
         ArrayList<Products> products = new ArrayList<>();
         products = db.getAllProducts(table_name);
         adapter = new ProductAdapter(products, new OnRecyclerViewClickListener() {
             @Override
             public void OnItemClick(int productId) {
+                // Xử lý sự kiện khi người dùng nhấn vào sản phẩm
                 Intent i = new Intent(getBaseContext(),DisplayProductsActivity.class);
                 i.putExtra(PRODUCT_ID_KEY,productId);
                 i.putExtra(TABLE_NAME_KEY,table_name);
@@ -83,38 +86,5 @@ public class ProductsCardActivity extends AppCompatActivity {
 
     }
 
-    @SuppressLint("ResourceAsColor")
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        SearchView searchView = (SearchView) menu.findItem(R.id.main_search).getActionView();
-        searchView.setSubmitButtonEnabled(true);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                ArrayList<Products> product = db.getProductForSearch(query,table_name);
-                adapter.setProducts(product);
-                adapter.notifyDataSetChanged();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                ArrayList<Products> product = db.getProductForSearch(newText,table_name);
-                adapter.setProducts(product);
-                adapter.notifyDataSetChanged();
-                return false;
-            }
-        });
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                ArrayList<Products> product = db.getAllProducts(table_name);
-                adapter.setProducts(product);
-                adapter.notifyDataSetChanged();
-                return false;
-            }
-        });
-        return true;
-    }
 
 }
