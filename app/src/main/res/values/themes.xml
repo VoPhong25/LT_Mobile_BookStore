@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ShoppingApp" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.Bookstore" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#0093AB</item>
         <item name="colorPrimaryVariant">#006778</item>

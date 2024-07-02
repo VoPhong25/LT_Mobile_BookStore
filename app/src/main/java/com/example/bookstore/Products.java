@@ -6,18 +6,18 @@ public class Products {
     private int image;
     private String name;
     private double price;
-    private String brand;
+    private String author; // Đã thay đổi từ brand thành author
     private int pieces;
     private String description;
     private double discount;
     private float rating;
     private int quantity;
 
-    public Products(int image, String name, double price, String brand, int pieces, String description, double discount, float rating) {
+    public Products(int image, String name, double price, String author, int pieces, String description, double discount, float rating) {
         this.image = image;
         this.name = name;
         this.price = price;
-        this.brand = brand;
+        this.author = author;
         this.pieces = pieces;
         this.description = description;
         this.discount = discount;
@@ -52,32 +52,32 @@ public class Products {
         this.rating = rating;
     }
 
-    public Products(int id, int image, String name, double price, String brand, int pieces, String description, double discount) {
+    public Products(int id, int image, String name, double price, String author, int pieces, String description, double discount) {
         this.id = id;
         this.image = image;
         this.name = name;
         this.price = price;
-        this.brand = brand;
+        this.author = author;
         this.pieces = pieces;
         this.description = description;
         this.discount = discount;
     }
 
-    public Products(int id, int image, String name, double price, String brand, float rating, int quantity) {
+    public Products(int id, int image, String name, double price, String author, float rating, int quantity) {
         this.id = id;
         this.image = image;
         this.name = name;
         this.price = price;
-        this.brand = brand;
+        this.author = author;
         this.rating = rating;
         this.quantity = quantity;
     }
 
-    public Products(int image, String name, double price, String brand, float rating, int quantity) {
+    public Products(int image, String name, double price, String author, float rating, int quantity) {
         this.image = image;
         this.name = name;
         this.price = price;
-        this.brand = brand;
+        this.author = author;
         this.rating = rating;
         this.quantity = quantity;
     }
@@ -90,11 +90,11 @@ public class Products {
         this.quantity = quantity;
     }
 
-    public Products(int image, String name, double price, String brand, int pieces, String description, double discount) {
+    public Products(int image, String name, double price, String author, int pieces, String description, double discount) {
         this.image = image;
         this.name = name;
         this.price = price;
-        this.brand = brand;
+        this.author = author;
         this.pieces = pieces;
         this.description = description;
         this.discount = discount;
@@ -132,12 +132,12 @@ public class Products {
         this.price = price;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public int getPieces() {

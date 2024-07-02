@@ -42,14 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         db = new ShoppingDatabase(this);
-        db.deleteDb(this);
+        db.deleteDatabase(this);
 //        db.deleteAllFashionProducts();
         db.getWritableDatabase();
         db.insertSampleData();
 //        db.insertSampleDataIntoPurchases();
-//        Products p = new Products(R.drawable.python,"python",32.0,"Electronic Book",23,"Python is a computer programming language often used to build websites and software, automate tasks, and conduct data analysis.",0);
-//
-//        db.insertProduct(p,ShoppingDatabase.TB_BOOK);
+
 
         history_card.setOnClickListener(new View.OnClickListener() {
             @Override
